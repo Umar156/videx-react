@@ -4,12 +4,8 @@ import sideImage from "../assets/images/sideImage.jpg";
 import "../assets/styling/home.scss";
 import ButtonModal from "../components/ButtonModal";
 import Dropdown from "react-bootstrap/Dropdown";
-import {
-  faArrowAltCircleUp,
-  faBarcode,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import { DATA_FILES } from "../constants";
+import { DATA_FILES, SECTION_INFO } from "../constants";
+import SectionBar from "../components/SectionBar";
 
 const Home = () => {
   return (
@@ -40,12 +36,7 @@ const Home = () => {
           <ButtonModal columns={DATA_FILES} />
         </div>
       </div>
-      <div className="row mt-3">
-        <div className="col-md-2 main-section">
-          <p className="form-sections">Personal Information</p>
-          <div className="section-bars"></div>
-        </div>
-      </div>
+      <SectionBar sections={SECTION_INFO} />
     </div>
   );
 };
