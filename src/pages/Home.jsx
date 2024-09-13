@@ -4,8 +4,9 @@ import sideImage from "../assets/images/sideImage.jpg";
 import "../assets/styling/home.scss";
 import ButtonModal from "../components/ButtonModal";
 import Dropdown from "react-bootstrap/Dropdown";
-import { DATA_FILES, SECTION_INFO } from "../constants";
+import { dataFiles, formData, sectionInfo } from "../constants";
 import SectionBar from "../components/SectionBar";
+import InputField from "../components/InputField";
 
 const Home = () => {
   return (
@@ -33,10 +34,11 @@ const Home = () => {
         </div>
         <div className="col-md-8 h-50">
           <img src={sideImage} alt="Image" className="header-image"></img>
-          <ButtonModal columns={DATA_FILES} />
+          <ButtonModal columns={dataFiles} />
         </div>
       </div>
-      <SectionBar sections={SECTION_INFO} />
+      <SectionBar sections={sectionInfo} />
+      <InputField section={formData[0]} />
     </div>
   );
 };
