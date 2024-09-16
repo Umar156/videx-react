@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "react-bootstrap";
 import "../assets/styling/home.scss";
 
-const ButtonModal = ({ columns }) => {
+const GetDataButton = ({ columns }) => {
   return (
     <div className="row mt-3">
       {columns.map((column, columnIndex) => (
@@ -25,4 +25,4 @@ const ButtonModal = ({ columns }) => {
   );
 };
 
-export default ButtonModal;
+export default GetDataButton;

@@ -1,13 +1,13 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import "../assets/styling/home.scss";
 import {
   faCircleQuestion,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import GenButton from "./GenButton";
 
-const InputField = ({ section }) => {
+const FormField = ({ section }) => {
   return (
     <div className="row mt-4 p-0 mx-0 main-section-info">
       <div className="d-flex section-wizard-btn  p-2 main-section-bg">
@@ -17,14 +17,7 @@ const InputField = ({ section }) => {
           </span>
           {section.section}
         </h3>
-        <Button className="wizard-btn">
-          <span>
-            <span className="me-1">
-              <FontAwesomeIcon icon={faCircleQuestion} />
-            </span>
-          </span>
-          Start wizard
-        </Button>
+        <GenButton name={"Start wizard"} icon={faCircleQuestion} />
       </div>
       <div className="p-3">
         {section.subSection.map((subSection, subSectionIndex) => (
@@ -48,4 +41,4 @@ const InputField = ({ section }) => {
   );
 };
 
-export default InputField;
+export default FormField;

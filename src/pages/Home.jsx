@@ -2,11 +2,11 @@ import React from "react";
 import logo from "../assets/images/logo.svg";
 import sideImage from "../assets/images/sideImage.jpg";
 import "../assets/styling/home.scss";
-import ButtonModal from "../components/ButtonModal";
+import GetDataButton from "../components/GetDataButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import { dataFiles, formData, sectionInfo } from "../constants";
 import SectionBar from "../components/SectionBar";
-import InputField from "../components/InputField";
+import FormField from "../components/FormField";
 
 const Home = () => {
   return (
@@ -34,11 +34,11 @@ const Home = () => {
         </div>
         <div className="col-md-8 h-50">
           <img src={sideImage} alt="Image" className="header-image"></img>
-          <ButtonModal columns={dataFiles} />
+          <GetDataButton columns={dataFiles} />
         </div>
       </div>
       <SectionBar sections={sectionInfo} />
-      <InputField section={formData[0]} />
+      <FormField section={formData[0]} />
     </div>
   );
 };
