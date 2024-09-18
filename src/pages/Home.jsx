@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import logo from "../assets/images/logo.svg";
 import sideImage from "../assets/images/sideImage.jpg";
 import "../assets/styling/home.scss";
@@ -9,6 +9,16 @@ import SectionBar from "../components/SectionBar";
 import FormField from "../components/FormField";
 
 const Home = () => {
+  const refs = useRef(
+    formData.reduce((acc, value) => {
+      acc[value.section] = React.createRef();
+      return acc;
+    }, {})
+  );
+
+  const handleClick = (section) => {
+    refs.current[section].current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div className="container bg-white p-3">
       <div className="row">
@@ -37,8 +47,14 @@ const Home = () => {
           <GetDataButton columns={dataFiles} />
         </div>
       </div>
-      <SectionBar sections={sectionInfo} />
-      <FormField section={formData[0]} />
+      <SectionBar sections={sectionInfo} onClick={handleClick} />
+      {formData.map((section, index) => (
+        <FormField
+          section={section}
+          key={index}
+          ref={refs.current[section.section]}
+        />
+      ))}
     </div>
   );
 };

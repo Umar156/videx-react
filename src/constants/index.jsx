@@ -1,8 +1,12 @@
 import {
   faArrowAltCircleUp,
   faBarcode,
+  faMapLocation,
   faPlus,
+  faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import { faContactCard } from "@fortawesome/free-solid-svg-icons/faContactCard";
+import { faIdCard } from "@fortawesome/free-solid-svg-icons/faIdCard";
 
 export const dataFiles = [
   {
@@ -61,6 +65,7 @@ export const sectionInfo = [
 export const formData = [
   {
     section: "Personal Information",
+    icon: faUserCircle,
     subSection: [
       {
         title: "Personal data of the applicant",
@@ -203,6 +208,134 @@ export const formData = [
           {
             label: "Further information if necessary:",
             key: "further-info",
+            type: "string",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    section: "Contact details",
+    icon: faContactCard,
+    subSection: [
+      {
+        title: "Current address and availability",
+        fields: [
+          {
+            label: "* Street:",
+            key: "street",
+            type: "string",
+          },
+          {
+            label: "House number:",
+            key: "house-number",
+            type: "string",
+          },
+          {
+            label: "Other address details:",
+            key: "other-address",
+            type: "string",
+          },
+          {
+            label: "* Postal code:",
+            key: "postal-code",
+            type: "string",
+          },
+          {
+            label: "* Location:",
+            key: "location",
+            type: "string",
+          },
+          {
+            label: "* Country",
+            key: "country",
+            type: "string",
+          },
+          {
+            label: "* Telephone/mobile number:",
+            key: "mobile-number",
+            type: "string",
+          },
+          {
+            label: "E-mail:",
+            key: "ms",
+            type: "string",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    section: "Identity documents",
+    icon: faIdCard,
+    subSection: [
+      {
+        title: "Identity documents",
+        fields: [
+          {
+            label: "* Type of travel document:",
+            key: "travel-doc",
+            type: "string",
+          },
+          {
+            label: "Travel document number:",
+            key: "doc-number",
+            type: "string",
+          },
+          {
+            label: "* Date of issue (DD.MM.YYYY):",
+            key: "date-of-issue",
+            type: "string",
+          },
+          {
+            label: "* Valid until (DD.MM.YYYY):",
+            key: "last-date",
+            type: "string",
+          },
+          {
+            label: "* Issuing State:",
+            key: "issue-state",
+            type: "string",
+          },
+          {
+            label: "Issued by:",
+            key: "issue-by",
+            type: "string",
+          },
+          {
+            label: "Exhibited in:",
+            key: "exhibited-in:",
+            type: "string",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    section: "Travel dates",
+    icon: faMapLocation,
+    subSection: [
+      {
+        title: "Travel dates and purpose",
+        fields: [
+          {
+            label: "* Purpose of stay in Germany:",
+            key: "germany-stay",
+            type: "string",
+          },
+          {
+            label: "Intended employment, if applicable:",
+            key: "employment",
+            type: "string",
+          },
+          {
+            label: "* From (DD.MM.YYYY):",
+            key: "date-of-start",
+            type: "string",
+          },
+          {
+            label: "* Until:",
+            key: "untill-date",
             type: "string",
           },
         ],

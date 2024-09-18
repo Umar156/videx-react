@@ -36,6 +36,12 @@
       "Noto Color Emoji";
     padding: 8px 16px;
   }
+  .sticky-bars {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding: 10px 0;
+  }
   .row {
     .col-md-4 {
       .home-logo {
@@ -89,6 +95,7 @@
       .section-bars {
         min-height: 90%;
         background-color: #ca7d7d;
+        cursor: pointer;
       }
       @media (max-width: 992px) {
         display: none;

@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import "../assets/styling/home.scss";
-import {
-  faCircleQuestion,
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GenButton from "./GenButton";
 
-const FormField = ({ section }) => {
+const FormField = forwardRef(({ section }, ref) => {
   const FieldKeyValue = section.subSection.reduce((acc, subSection) => {
     subSection.fields.forEach((field) => {
       if (!acc[field.key]) {
@@ -39,11 +36,11 @@ const FormField = ({ section }) => {
   };
   return (
     <>
-      <div className="row mt-4 p-0 mx-0 main-section-info">
+      <div className="row mt-4 p-0 mx-0 main-section-info" ref={ref}>
         <div className="d-flex section-wizard-btn  p-2 main-section-bg">
           <h3 className="section-font">
             <span className="me-1">
-              <FontAwesomeIcon icon={faUserCircle} />
+              <FontAwesomeIcon icon={section.icon} />
             </span>
             {section.section}
           </h3>
@@ -78,6 +75,6 @@ const FormField = ({ section }) => {
       </button>
     </>
   );
-};
+});
 
 export default FormField;
