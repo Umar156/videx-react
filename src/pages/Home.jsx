@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import logo from "../assets/images/logo.svg";
 import sideImage from "../assets/images/sideImage.jpg";
 import "../assets/styling/home.scss";
@@ -9,12 +9,49 @@ import SectionBar from "../components/SectionBar";
 import FormField from "../components/FormField";
 
 const Home = () => {
-  const refs = useRef(
-    formData.reduce((acc, value) => {
-      acc[value.section] = React.createRef();
+  const [allFormValues, setAllFormValues] = useState(() =>
+    formData.reduce((acc, section) => {
+      acc[section.section] = section.subSection.reduce((subAcc, subSection) => {
+        subSection.fields.forEach((field) => {
+          subAcc[field.key] = "";
+        });
+        return subAcc;
+      }, {});
       return acc;
     }, {})
   );
+
+  const refs = useRef(
+    formData.reduce((acc, section) => {
+      acc[section.section] = React.createRef();
+      return acc;
+    }, {})
+  );
+
+  const handleInputChange = (e, key, section) => {
+    setAllFormValues((prevValues) => ({
+      ...prevValues,
+      [section]: {
+        ...prevValues[section],
+        [key]: e.target.value,
+      },
+    }));
+  };
+
+  const handleSave = () => {
+    const dataToStore = formData.map((section) => ({
+      sectionTitle: section.section,
+      subSections: section.subSection.map((subSection) => ({
+        subSectionTitle: subSection.title,
+        fields: subSection.fields.map((field) => ({
+          label: field.label,
+          value: allFormValues[section.section][field.key],
+        })),
+      })),
+    }));
+
+    localStorage.setItem("formData", JSON.stringify(dataToStore));
+  };
 
   const handleClick = (section) => {
     refs.current[section].current.scrollIntoView({ behavior: "smooth" });
@@ -53,6 +90,10 @@ const Home = () => {
           section={section}
           key={index}
           ref={refs.current[section.section]}
+          formValues={allFormValues[section.section]}
+          handleInputChange={handleInputChange}
+          isLastSection={index === formData.length - 1}
+          handleSave={handleSave}
         />
       ))}
     </div>
