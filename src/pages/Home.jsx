@@ -39,18 +39,18 @@ const Home = () => {
   };
 
   const handleSave = () => {
-    const dataToStore = formData.map((section) => ({
-      sectionTitle: section.section,
-      subSections: section.subSection.map((subSection) => ({
-        subSectionTitle: subSection.title,
-        fields: subSection.fields.map((field) => ({
-          label: field.label,
-          value: allFormValues[section.section][field.key],
-        })),
-      })),
-    }));
+    // const dataToStore = formData.map((section) => ({
+    //   sectionTitle: section.section,
+    //   subSections: section.subSection.map((subSection) => ({
+    //     subSectionTitle: subSection.title,
+    //     fields: subSection.fields.map((field) => ({
+    //       label: field.label,                                                                 commented code give data in sections
+    //       value: allFormValues[section.section][field.key],
+    //     })),
+    //   })),
+    // }));
 
-    localStorage.setItem("formData", JSON.stringify(dataToStore));
+    localStorage.setItem("formData", JSON.stringify(allFormValues)); ////localStorage.setItem("formData", JSON.stringify(dataToStore));
   };
 
   const handleClick = (section) => {
