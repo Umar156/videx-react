@@ -26,19 +26,44 @@ const FormField = forwardRef(
               <div key={subSectionIndex} className="sub-section mt-3">
                 <h4 className="sub-section-bg">{subSection.title}</h4>
                 <div className="row px-3 pb-3">
-                  {subSection.fields.map((field, fieldIndex) => (
-                    <div className="col-lg-4" key={fieldIndex}>
-                      <label className="my-2">{field.label}</label>
-                      <input
-                        type={field.type}
-                        className="form-control"
-                        value={formValues[field.key]}
-                        onChange={(e) =>
-                          handleInputChange(e, field.key, section.section)
-                        }
-                      />
-                    </div>
-                  ))}
+                  {subSection.fields.map((field, fieldIndex) => {
+                    const isBold = field.label.includes("*");
+                    return (
+                      <div className="col-lg-4" key={fieldIndex}>
+                        <label
+                          className={`my-2 ${isBold ? "font-weight-bold" : ""}`}
+                        >
+                          {field.label}
+                        </label>
+
+                        {field.type === "select" ? (
+                          <select
+                            name={field.key}
+                            value={formValues[field.key]}
+                            onChange={(e) =>
+                              handleInputChange(e, field.key, section.section)
+                            }
+                            className="form-control"
+                          >
+                            {field.options.map((option, optionIndex) => (
+                              <option key={optionIndex} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                        ) : (
+                          <input
+                            type={field.type}
+                            className="form-control"
+                            value={formValues[field.key]}
+                            onChange={(e) =>
+                              handleInputChange(e, field.key, section.section)
+                            }
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ))}
