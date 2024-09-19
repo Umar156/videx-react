@@ -5,10 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GenButton from "./GenButton";
 
 const FormField = forwardRef(
-  (
-    { section, formValues, handleInputChange, isLastSection, handleSave },
-    ref
-  ) => {
+  ({ section, formValues, handleInputChange }, ref) => {
     return (
       <>
         <div className="row mt-4 p-0 mx-0 main-section-info" ref={ref}>
@@ -69,14 +66,6 @@ const FormField = forwardRef(
             ))}
           </div>
         </div>
-        {isLastSection && (
-          <button
-            className="btn btn-primary mt-3 px-5 save-btn"
-            onClick={handleSave}
-          >
-            Save
-          </button>
-        )}
       </>
     );
   }

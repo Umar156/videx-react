@@ -92,10 +92,14 @@ const Home = () => {
           ref={refs.current[section.section]}
           formValues={allFormValues[section.section]}
           handleInputChange={handleInputChange}
-          isLastSection={index === formData.length - 1}
-          handleSave={handleSave}
         />
       ))}
+      <button
+        className="btn btn-primary mt-3 px-5 save-btn"
+        onClick={handleSave}
+      >
+        Save
+      </button>
     </div>
   );
 };
