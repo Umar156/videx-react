@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GenButton from "./GenButton";
 
 const FormField = forwardRef(
-  ({ section, formValues, handleInputChange }, ref) => {
+  ({ section, formValues, handleInputChange, error }, ref) => {
     return (
       <>
         <div className="row mt-4 p-0 mx-0 main-section-info" ref={ref}>
@@ -25,6 +25,7 @@ const FormField = forwardRef(
                 <div className="row px-3 pb-3">
                   {subSection.fields.map((field, fieldIndex) => {
                     const isBold = field.label.includes("*");
+                    const hasError = error && error[field.key];
                     return (
                       <div className="col-lg-4" key={fieldIndex}>
                         <label
@@ -40,7 +41,9 @@ const FormField = forwardRef(
                             onChange={(e) =>
                               handleInputChange(e, field.key, section.section)
                             }
-                            className="form-control"
+                            className={`form-control remove-outline ${
+                              hasError ? "error-border" : ""
+                            }`}
                           >
                             {field.options.map((option, optionIndex) => (
                               <option key={optionIndex} value={option.value}>
@@ -51,12 +54,19 @@ const FormField = forwardRef(
                         ) : (
                           <input
                             type={field.type}
-                            className="form-control"
+                            className={`form-control remove-outline ${
+                              hasError ? "error-border" : ""
+                            }`}
                             value={formValues[field.key]}
                             onChange={(e) =>
                               handleInputChange(e, field.key, section.section)
                             }
                           />
+                        )}
+                        {hasError && (
+                          <div className="text-danger mt-1">
+                            {error[field.key]}
+                          </div>
                         )}
                       </div>
                     );

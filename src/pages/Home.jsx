@@ -27,30 +27,83 @@ const Home = () => {
       return acc;
     }, {})
   );
+  const [errors, setErrors] = useState({});
+
+  const validateField = (key, value) => {
+    if (value.trim() === "") {
+      return "This field is required.";
+    }
+    switch (key) {
+      case "surname":
+      case "previous-member":
+      case "first-name":
+      case "pob":
+      case "cob":
+      case "gender":
+      case "ms":
+      case "current-nationality":
+        const dataRegex = /^[a-zA-Z\s]*$/;
+        if (!dataRegex.test(value)) {
+          return "English alphabet only.";
+        }
+        break;
+      case "dob":
+        const dobRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        if (!dobRegex.test(value)) {
+          return "Invalid date";
+        }
+        break;
+    }
+    return null;
+  };
 
   const handleInputChange = (e, key, section) => {
+    const value = e.target.value;
+
+    const error = validateField(key, value);
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [section]: {
+        ...prevErrors[section],
+        [key]: error,
+      },
+    }));
+
     setAllFormValues((prevValues) => ({
       ...prevValues,
       [section]: {
         ...prevValues[section],
-        [key]: e.target.value,
+        [key]: value,
       },
     }));
   };
 
   const handleSave = () => {
-    // const dataToStore = formData.map((section) => ({
-    //   sectionTitle: section.section,
-    //   subSections: section.subSection.map((subSection) => ({
-    //     subSectionTitle: subSection.title,
-    //     fields: subSection.fields.map((field) => ({
-    //       label: field.label,                                                                 commented code give data in sections
-    //       value: allFormValues[section.section][field.key],
-    //     })),
-    //   })),
-    // }));
-
-    localStorage.setItem("formData", JSON.stringify(allFormValues)); ////localStorage.setItem("formData", JSON.stringify(dataToStore));
+    const newErrors = {};
+    formData.forEach((section) => {
+      section.subSection.forEach((subSection) => {
+        subSection.fields.forEach((field) => {
+          if (!newErrors[section.section]) {
+            const error = validateField(
+              field.key,
+              allFormValues[section.section][field.key]
+            );
+            if (error) {
+              if (!newErrors[section.section]) {
+                newErrors[section.section] = {};
+              }
+              newErrors[section.section][field.key] = error;
+            }
+          }
+        });
+      });
+    });
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      localStorage.setItem("formData", JSON.stringify(allFormValues));
+    }
   };
 
   const handleClick = (section) => {
@@ -92,6 +145,7 @@ const Home = () => {
           ref={refs.current[section.section]}
           formValues={allFormValues[section.section]}
           handleInputChange={handleInputChange}
+          error={errors[section.section]}
         />
       ))}
       <button
