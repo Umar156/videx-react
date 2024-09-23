@@ -48,10 +48,15 @@ const Home = () => {
         }
         break;
       case "dob":
+        if (value.length === 10) {
+          return null;
+        }
         const dobRegex = /^\d{2}\/\d{2}\/\d{4}$/;
         if (!dobRegex.test(value)) {
-          return "Invalid date";
+          return "Invalid date format. Please use DD/MM/YYYY.";
         }
+        break;
+      default:
         break;
     }
     return null;
